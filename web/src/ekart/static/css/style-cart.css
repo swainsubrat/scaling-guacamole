@@ -1,0 +1,13 @@
+img,
+.details {
+  padding: 5px 5px 5px 5px;
+}
+
+#cart-component {
+  background-color: white;
+  border-radius: 3%;
+}
+
+#red-span {
+  color: red;
+}

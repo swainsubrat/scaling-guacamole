@@ -1,0 +1,51 @@
+{% extends "base.html" %} {% block content %}
+
+<link rel="stylesheet" href="{{url_for('static', filename='css/style-home.css')}}" />
+
+<div class="product-block">
+  <div class="row">
+    {% for product in pages.items %}
+    <div class="col-md-3 mt-4">
+      <div class="card">
+        {% if 'http' in product.image_1 %}
+        <img src="{{ product.image_1 }}" class="card-img-top" alt="{{product.name}}" height="180" width="180" />
+        {% else %}
+        <img src="{{url_for('static', filename='images/' + product.image_1)}}" class="card-img-top" alt="{{product.name}}" height="180" width="180" />
+        {% endif %}
+        <div class="card-body">
+          <strong> {{ product.name }}</strong><br />
+          <span>M.R.P: Rs.{{product.price}}</span><br />
+          {% if product.discount > 0 %}
+          <span> - {{product.discount}}% Off</span>
+          {% endif %}
+        </div>
+        <div class="card-footer">
+          <a href="{{ url_for('product_details', product_id=product.id) }}" class="float-left btn btn-sm btn-primary">Details</a>
+          <a href="{{url_for('add_to_cart', product_id=product.id)}}" class="float-left btn btn-sm btn-success">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<br />
+<hr />
+<nav aria-label="...">
+  <ul class="pagination">
+    <li class="page-item {% if not pages.has_prev %} disabled {% endif %}">
+      <a class="page-link" href="./home?page={{ pages.prev_num }}">Previous</a>
+    </li>
+
+    {% for page in pages.iter_pages() %}
+    <li class="page-item {% if page == pages.page %} active {% endif %}">
+      <a class="page-link" href="./home?page={{ page }}"> {{ page }}</a>
+    </li>
+    {% endfor %}
+    <li class="page-item {% if not pages.has_next %} disabled {% endif %}">
+      <a class="page-link" href="./home?page={{ pages.next_num }}">Next</a>
+    </li>
+  </ul>
+</nav>
+
+{% endblock content%}

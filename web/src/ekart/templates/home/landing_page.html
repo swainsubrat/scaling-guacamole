@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homepage</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style-landing.css')}}" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap" />
+  </head>
+  <body>
+    <!-- Header Section -->
+    <div class="header-landing">
+      <div class="container">
+        <div class="navbar">
+          <div class="logo">
+            <a class="navbar-brand" href="{{ url_for('home') }}">
+              <img src="{{url_for('static', filename='images/logo.png')}}" alt="Logo" height="40" width="40" />
+            </a>
+          </div>
+          <!-- <form class="search-form" method="GET" action="search">
+            <input class="search-input" type="search" placeholder="Search" aria-label=" Search" name="q" />
+            <button class="bttn-search" type="submit">Search</button>
+          </form> -->
+          <nav>
+            <ul>
+              <li>
+                <a href="{{ url_for('home') }}">Home <span class="sr-only"></span></a>
+              </li>
+              {% if current_user.is_authenticated %} {% if current_user.privilage == 'admin' %}
+              <li>
+                <a href="{{ url_for('admin.index') }}">Admin</a>
+              </li>
+              {% endif %} {% else %}
+              <li>
+                <a href="{{ url_for('login') }}">Login</a>
+              </li>
+              <li>
+                <a href="{{ url_for('register') }}">Register</a>
+              </li>
+              {% endif %} {% if current_user.is_authenticated %}
+              <li>
+                <a href="{{ url_for('logout') }}">Logout</a>
+              </li>
+              {% endif %}
+            </ul>
+          </nav>
+        </div>
+        <div class="row">
+          <div class="col-2">
+            <h1>Swinder: Next Gen Smart-home Solution</h1>
+            <p>Give your Home Experience<br />A New Taste!</p>
+            <a href="{{ url_for('home') }}" class="bttn">Explore Now &#8594;</a>
+          </div>
+          <div class="col-2">
+            <!-- <img src="{{url_for('static', filename='images/shopping.png')}}" /> -->
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/Hv6EMd8dlQk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured Categories -->
+    <div class="categories">
+      <div class="small-container">
+        <h2 class="title">Featured Categories</h2>
+        <div class="row">
+          <div class="col-3">
+            <img height="339px" src="{{url_for('static', filename='images/electronics.jpg')}}" alt="Electronics" />
+            <p class="category-text">
+              <a href="{{ url_for('home') }}"> Electronics </a>
+            </p>
+          </div>
+          <div class="col-3">
+            <img height="339px" src="{{url_for('static', filename='images/books.jpg')}}" alt="Books" />
+            <p class="category-text">
+              <a href="{{ url_for('home') }}"> Books </a>
+            </p>
+          </div>
+          <div class="col-3">
+            <img src="{{url_for('static', filename='images/category-3.jpg')}}" alt="Fashion" />
+            <p class="category-text">
+              <a href="{{ url_for('home') }}"> Fashion </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Section -->
+
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="footer-col-1">
+            <h3>Download our App</h3>
+            <p>Download App for Android and ios mobile phone.</p>
+            <div class="app-logo">
+              <img src="{{url_for('static', filename='images/play-store.png')}}" alt="Playstore" />
+              <img src="{{url_for('static', filename='images/app-store.png')}}" alt="Appstore" />
+            </div>
+          </div>
+          <div class="footer-col-2">
+            <img src="{{url_for('static', filename='images/logo.png')}}" alt="Logo" />
+            <p>
+              Our Purpost is to Deliver Best Quality Window Blinds Which are Safe and Secure
+            </p>
+          </div>
+          <div class="footer-col-3">
+            <ul>
+              <li>Facebook</li>
+              <li>Twitter</li>
+              <li>Instagram</li>
+              <li>YouTube</li>
+            </ul>
+          </div>
+        </div>
+        <hr />
+        <p class="copyright">
+          Copyright 2021 - Ekart Solutions
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

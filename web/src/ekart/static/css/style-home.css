@@ -1,0 +1,22 @@
+.product-block {
+  padding: 3px 3px 3px 3px;
+  margin: 10px, 10px, 10px, 10px;
+}
+
+#admin-page {
+  margin: auto;
+  font-weight: 900;
+}
+
+#float {
+  float: right;
+}
+
+@media (min-width: 768px) {
+  .navbar-brand.abs {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+  }
+}

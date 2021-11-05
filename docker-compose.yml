@@ -1,0 +1,19 @@
+version: "3.7"
+services:
+
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./web/src/:/app/
+      # - ./web/config.yml:/app/config.yml
+    # environment:
+    #   STRIPE_PUBLIC_KEY: ${STRIPE_PUBLIC_KEY}
+    #   STRIPE_PRIVATE_KEY: ${STRIPE_PRIVATE_KEY}
+    #   session: ${session}
+    # depends_on:
+    #   - redis
+    #   - rabbitmq

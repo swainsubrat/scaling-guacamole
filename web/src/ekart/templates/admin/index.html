@@ -1,0 +1,8 @@
+{% extends 'admin/master.html' %} {% block body %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/style-home.css')}}" />
+
+<div id="admin-page">
+  Welcome to the Admin Page <br />
+  <button class="btn btn-primary" onclick="window.location.href='{{ url_for( 'home' ) }}';">Home</button>
+</div>
+{% endblock %}
