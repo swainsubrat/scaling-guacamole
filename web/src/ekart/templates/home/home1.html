@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+   <style>
+        .dropbtn {
+          background-color: #1A8BAF;
+          color: white;
+          padding: 16px;
+          font-size: 16px;
+          border: none;
+        }
+        
+        .dropdown {
+          position: relative;
+          display: inline-block;
+        }
+        
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          background-color: #f1f1f1;
+          min-width: 160px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 1;
+        }
+        
+        .dropdown-content a {
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+        }
+        
+        .dropdown-content a:hover {background-color: #ddd;}
+        
+        .dropdown:hover .dropdown-content {display: block;}
+        
+        .dropdown:hover .dropbtn {background-color: #1A8BAF;}
+        </style>
+</head>
+<body>
+    <div class="dropdown">
+        <button class="dropbtn">Select a Window</button>
+        <div class="dropdown-content">
+          <button type="button" onclick="loadDoc()">window1</button>
+          <a href="{{ url_for('window1')}}">Window 2</a>
+          <a href="{{ url_for('window1')}}">Window 3</a>
+          <a href="./window1.html">Window 4</a>
+          <a href="window1.html">Window 5</a>
+          <a href="window1.html">Window 6</a>
+        </div>
+      </div>
+      <script>
+        function loadDoc() {
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              document.getElementById("demo").innerHTML = this.responseText;
+            }
+          };
+          xhttp.open("GET", "window1.html", true);
+          xhttp.send();
+        }
+        </script>
+</body>
+</html>

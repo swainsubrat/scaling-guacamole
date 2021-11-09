@@ -33,9 +33,9 @@ def home():
     # page = request.args.get("page", 1, type=int)
     # products = Products.query.filter(Products.price > 0)
     # pages = products.paginate(page=page, per_page=8)
-    # return render_template(
-    #     "home/home.html", title="Home", products=products, pages=pages
-    # )
+    return render_template(
+         "home/home1.html", title="Home"
+    )
     return "This is home page"
 
 
@@ -113,7 +113,20 @@ def logout():
     logout_user()
     return redirect(url_for("home"))
 
+@app.route("/window1", methods=["GET", "POST"])
+def window1():
+    return render_template("home/window1.html", title="window1")
 
+
+
+
+
+
+# @login_required
+# @app.route("/window1")
+# def window1():
+#     """set up for window1"""
+#     return redirect(url_for("window1.html"))
 # @login_required
 # @app.route("/profile", methods=["GET", "POST"])
 # def profile():
