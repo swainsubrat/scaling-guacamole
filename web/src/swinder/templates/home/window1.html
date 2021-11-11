@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Window 1</title>
+</head>
+<body>
+    <h1> Set the range for window 1 to open and close</h1>
+
+<div class="slidecontainer">
+  <input type="range" id="angle" min="1" max="90" value="50" class="slider" id="myRange">
+  <input type="radio" id="open" class="message_pri" name="message_pri" value="open" checked="checked"/>
+  <label for="open">Open</label> 
+  <input type="radio" id="close" class="message_pri" name="message_pri" value="close" />
+  <label for="close">Close</label> 
+  <input type="submit" id="submit" name="Send" value="Apply">
+</div>
+
+<script type="text/javascript">
+    $("#submit").on("click", function () {
+      var angle = $("#angle").val();
+      var action = $(".message_pri:checked").val();
+      
+      var url = "/operation?action=" + action + "&id=1"
+      var url1 = "operation?action=close&id=2"
+
+      $.ajax({
+        async: false,
+        type: "GET",
+        url: url,
+        success: function (data) {
+            let response = data["isSuccess"];
+            alert(response)
+        },
+    });
+    });
+
+</script>
+
+</body>
+</html>

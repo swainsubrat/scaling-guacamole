@@ -1,0 +1,4 @@
+Flask==1.1.2
+Flask-RESTful==0.3.8
+AWSIoTPythonSDK==1.4.9
+Flask-MQTT==1.1.1

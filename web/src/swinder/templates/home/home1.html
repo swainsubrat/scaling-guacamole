@@ -1,0 +1,148 @@
+{% extends "base.html" %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Board</title>
+
+   <style>
+        .dropbtn {
+          background-color: #1A8BAF;
+          color: white;
+          padding: 16px;
+          font-size: 16px;
+          border: none;
+        }
+        
+        .dropdown {
+          position: relative;
+          display: inline-block;
+          align-content: center;
+        }
+        
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          background-color: #f1f1f1;
+          min-width: 160px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 1;
+        }
+        
+        .dropdown-content a {
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+        }
+        
+        .dropdown-content a:hover {background-color: #ddd;}
+        
+        .dropdown:hover .dropdown-content {display: block;}
+        
+        .dropdown:hover .dropbtn {background-color: #1A8BAF;}
+  </style>
+
+</head>
+<body>
+  <div class="row">
+    <div class="col-6">
+      <!-- <div class="dropdown">
+        <button class="dropbtn">Select a Window</button>
+        <div class="dropdown-content">
+          
+          <a href="#id1">Window 1</a>
+          <a href="#id2">Window 2</a>
+          <a href="#id3">Window 3</a>
+          <a href="#id4">Window 4</a>
+          <a href="#id5">Window 5</a>
+        </div>
+      </div> -->
+
+      <div class="dropdown">
+      <select id="window_dropdown" name="winodws" class="dropdown">
+        <option value="1">Window 1</option>
+        <option value="2">Window 2</option>
+        <option value="3">Window 3</option>
+        <option value="4">Window 4</option>
+        <option value="5">Window 5</option>
+      </select>
+    </div>
+    </div>
+
+    <div class="col-6">
+
+      <div class="row">
+        
+
+        <input type="radio" id="open" class="message_pri" name="message_pri" value="open" checked="checked"/>
+        <label for="open">Open</label> 
+        <input type="radio" id="close" class="message_pri" name="message_pri" value="close" />
+        <label for="close">Close</label> 
+
+        <br>
+        <br>
+        <div class="slidecontainer">
+          <label for="angle" class="form-label">Select the angle of opening</label>
+          <input type="range" id="angle" class="form-range" min="1" max="90" value="50" class="slider" id="myRange">
+        </div>
+
+        
+          <input type="submit" class="btn btn-success" id="submit" name="Send" value="Apply">
+      </div>
+      
+    </div>
+  </div>
+
+      <script type="text/javascript">
+
+        var id = null;
+        var response = true;
+
+        $("#id1").on("click", function () {
+          var id = 1;
+        });
+        $("#id2").on("click", function () {
+          var id = 2;
+        });
+        $("#id3").on("click", function () {
+          var id = 3;
+        });
+        $("#id4").on("click", function () {
+          var id = 4;
+        });
+        $("#id5").on("click", function () {
+          var id = 5;
+        });
+
+        $("#submit").on("click", function () {
+          var angle = $("#angle").val();
+          var action = $(".message_pri:checked").val();
+          var idd = $('#window_dropdown :selected').val();
+          
+          var url = "/operation?action=" + action + "&id=" + idd
+          var url1 = "operation?action=close&id=2"
+
+          $.ajax({
+            async: false,
+            type: "GET",
+            url: url,
+            success: function (data) {
+                console.log(data)
+                let respnse = data["isSuccess"];
+                if (response) {
+                  alert("Success!!!!!!!")
+                }
+                else {
+                  alert("Kindly Try again!!!!!!!!!")
+                }
+            },
+        });
+        });
+    
+    </script>
+</body>
+</html>
+{% endblock content %}

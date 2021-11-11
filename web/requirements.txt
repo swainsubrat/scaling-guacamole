@@ -8,7 +8,7 @@ Flask-Uploads==0.2.1
 Flask-WTF==0.14.3
 stripe==2.56.0
 SQLAlchemy<1.4.0
-# Flask-Avatars==0.2.2
+AWSIoTPythonSDK==1.4.9
 redis==3.5.3
 pika==1.2.0
 minio==7.0.3

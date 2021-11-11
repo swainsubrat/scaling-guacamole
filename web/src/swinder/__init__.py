@@ -5,7 +5,7 @@
 # pylint: disable=too-few-public-methods
 # pylint: disable=no-self-use
 """
-ekart module file
+swinder module file
 """
 import os
 
@@ -54,9 +54,9 @@ class MyAdminIndexView(AdminIndexView):
 
 
 admin = Admin(
-    app, name="Ekart Admin", template_mode="bootstrap3", index_view=MyAdminIndexView()
+    app, name="Swinder Admin", template_mode="bootstrap3", index_view=MyAdminIndexView()
 )
 
-from ekart.home import routes  # isort:skip # noqa: E402
+from swinder.home import routes  # isort:skip # noqa: E402
 
 __all__ = ["User", "routes"]

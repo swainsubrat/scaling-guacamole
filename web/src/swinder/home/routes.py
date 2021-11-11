@@ -4,13 +4,12 @@ Routes file for home
 """
 import os
 
-from ekart import app, bcrypt, db
-# from ekart.products.models import Products
+from swinder import app, bcrypt, db
+from swinder.utils.constants import ACTIONS, REGISTERED_IDS
+from swinder.utils.aws_utils import publish
 from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required, login_user, logout_user
-# from minio import Minio
 
-# from werkzeug.utils import secure_filename
 from .forms import LoginForm, RegistrationForm
 from .models import User
 
@@ -24,19 +23,14 @@ def page_not_found(error_code):
         error_code = 404
     return render_template("admin/page_404.html"), error_code
 
+
 @login_required
 @app.route("/home")
 def home():
     """
     Endpoint for home
     """
-    # page = request.args.get("page", 1, type=int)
-    # products = Products.query.filter(Products.price > 0)
-    # pages = products.paginate(page=page, per_page=8)
-    return render_template(
-         "home/home1.html", title="Home"
-    )
-    return "This is home page"
+    return render_template("home/home1.html", title="Home")
 
 
 @app.route("/")
@@ -113,6 +107,42 @@ def logout():
     logout_user()
     return redirect(url_for("home"))
 
+
+@app.route("/operation")
+def operation():
+    """
+    1. Get the id
+    2. AWS IoT -> On the window with id : id
+    3. Get response
+    4. Return response
+    """
+    response = {"isSuccess": False}
+    id       = request.args.get("id")
+    action   = request.args.get("action")
+    angle    = request.args.get("angle", 90)
+
+    if id not in REGISTERED_IDS:
+        response["message"] = "Requested device is not registered!!!"
+        return response
+
+    if action not in ACTIONS:
+        response["message"] = f"Requested Action doesn't exist, Try among {ACTIONS}!!!"
+        return response
+    
+    message = {}
+    message["id"] = id
+    message["action"] = action
+    message["angle"]  = angle
+
+    is_success = publish(message=message, topic="user_publish")
+
+    if is_success:
+        response["isSuccess"] = is_success
+    else:
+        response["message"] = is_success
+
+    return response
+
 @app.route("/window1", methods=["GET", "POST"])
 def window1():
     return render_template("home/window1.html", title="window1")
@@ -136,68 +166,3 @@ def window5():
 @app.route("/window6", methods=["GET", "POST"])
 def window6():
     return render_template("home/window6.html", title="window6")
-
-
-
-
-
-
-# @login_required
-# @app.route("/window1")
-# def window1():
-#     """set up for window1"""
-#     return redirect(url_for("window1.html"))
-# @login_required
-# @app.route("/profile", methods=["GET", "POST"])
-# def profile():
-#     """
-#     Endpoint to show profile page
-#     """
-#     path = os.path.join(app.config["UPLOAD_FOLDER"], f"{current_user.username}_img.jpg")
-#     allowed_file_types = ["jpg", "jpeg", "png"]
-
-#     # Connect to minio
-#     minio_client = Minio(
-#         "minio:9000",
-#         access_key=os.environ.get("MINIO_ACCESS_KEY"),
-#         secret_key=os.environ.get("MINIO_SECRET_KEY"),
-#         secure=False,
-#     )
-
-#     # Check for bucket named current_user.username
-#     found = minio_client.bucket_exists(current_user.username)
-
-#     # if present, fetch image and return
-#     if found:
-#         minio_client.fget_object(
-#             current_user.username, f"{current_user.username}_img.jpg", path
-#         )
-
-#     if request.method == "POST":
-#         if request.files["image"].filename != "":
-#             image = request.files["image"]
-#             extension = image.split(".")[1]
-#             if extension in allowed_file_types:
-#                 image.save(path)
-
-#                 # Check for bucket name, if not present create and upload
-#                 if not found:
-#                     minio_client.make_bucket(current_user.username)
-#                 minio_client.fput_object(
-#                     current_user.username, f"{current_user.username}_img.jpg", path
-#                 )
-
-#                 return render_template(
-#                     "home/profile.html",
-#                     title="Profile",
-#                     present=True,
-#                     filename=f"{current_user.username}_img.jpg",
-#                 )
-#             else:
-#                 flash("Wrong file format, please upload again", "warning")
-#     return render_template(
-#         "home/profile.html",
-#         title="Profile",
-#         present=found,
-#         filename=f"{current_user.username}_img.jpg",
-#     )

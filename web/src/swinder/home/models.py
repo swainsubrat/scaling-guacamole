@@ -3,10 +3,10 @@
 """
 Models for home component
 
-superuser = User(name="admin", username="admin", email="admin@ekart.com", password="admin1234", privilage="superuser")
+superuser = User(name="admin", username="admin", email="admin@swinder.com", password="admin1234", privilage="superuser")
 
 """
-from ekart import db, login_manager
+from swinder import db, login_manager
 from flask_login import UserMixin
 
 

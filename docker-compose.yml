@@ -9,11 +9,23 @@ services:
       - "5000:5000"
     volumes:
       - ./web/src/:/app/
-      # - ./web/config.yml:/app/config.yml
-    # environment:
-    #   STRIPE_PUBLIC_KEY: ${STRIPE_PUBLIC_KEY}
-    #   STRIPE_PRIVATE_KEY: ${STRIPE_PRIVATE_KEY}
-    #   session: ${session}
-    # depends_on:
-    #   - redis
-    #   - rabbitmq
+
+  worker_scheduler:
+    build:
+      context: ./worker_scheduler/
+      dockerfile: ./Dockerfile
+    volumes:
+      # - ./NexaCore/nexa:/opt/conda/lib/python3.7/site-packages/nexa
+      - ./worker_scheduler/src/:/app/
+    restart: always
+    command: weather_worker.py
+  
+  device:
+    build:
+      context: ./device
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./device/src/:/app
+    restart: always
