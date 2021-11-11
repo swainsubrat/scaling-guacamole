@@ -117,6 +117,26 @@ def logout():
 def window1():
     return render_template("home/window1.html", title="window1")
 
+@app.route("/window2", methods=["GET", "POST"])
+def window2():
+    return render_template("home/window2.html", title="window2")
+
+@app.route("/window3", methods=["GET", "POST"])
+def window3():
+    return render_template("home/window3.html", title="window3")
+
+@app.route("/window4", methods=["GET", "POST"])
+def window4():
+    return render_template("home/window4.html", title="window4")
+
+@app.route("/window5", methods=["GET", "POST"])
+def window5():
+    return render_template("home/window5.html", title="window5")
+
+@app.route("/window6", methods=["GET", "POST"])
+def window6():
+    return render_template("home/window6.html", title="window6")
+
 
 
 

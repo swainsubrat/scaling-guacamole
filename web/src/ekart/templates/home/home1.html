@@ -47,15 +47,16 @@
     <div class="dropdown">
         <button class="dropbtn">Select a Window</button>
         <div class="dropdown-content">
-          <button type="button" onclick="loadDoc()">window1</button>
-          <a href="{{ url_for('window1')}}">Window 2</a>
-          <a href="{{ url_for('window1')}}">Window 3</a>
-          <a href="./window1.html">Window 4</a>
-          <a href="window1.html">Window 5</a>
-          <a href="window1.html">Window 6</a>
+          
+          <a href="{{ url_for('window1')}}">Window 1</a>
+          <a href="{{ url_for('window2')}}">Window 2</a>
+          <a href="{{ url_for('window3')}}">Window 3</a>
+          <a href="{{ url_for('window4')}}">Window 4</a>
+          <a href="{{ url_for('window5')}}">Window 5</a>
+          <a href="{{ url_for('window6')}}">Window 6</a>
         </div>
       </div>
-      <script>
+      <!--<script>
         function loadDoc() {
           var xhttp = new XMLHttpRequest();
           xhttp.onreadystatechange = function() {
@@ -66,6 +67,6 @@
           xhttp.open("GET", "window1.html", true);
           xhttp.send();
         }
-        </script>
+        </script>-->
 </body>
 </html>
