@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> Set the Range for window6 to open and close</h1>
+
+<div class="slidecontainer">
+  <!-- <p>Custom range slider:</p>-->
+  <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+  <INPUT type="submit" onclick="clicked();"  name="Send" value="Apply">
+  
+  </div>
+  
+  <script type="text/javascript">
+    function clicked() {
+       if (confirm('Do you want to apply changes to window6 ?')) {
+           yourformelement.submit();
+       } else {
+           return false;
+       }
+    }
+  
+  </script>
+</body>
+</html>
