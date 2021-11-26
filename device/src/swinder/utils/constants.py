@@ -5,12 +5,12 @@ REGISTERED_IDS = ["1", "2", "3", "4", "5"]
 ########## AWS ##########
 PORT         = 8883
 CLIENT_ID    = "swinder-1"
-ENDPOINT     = "a242di4iaalxm7-ats.iot.us-west-2.amazonaws.com"
+ENDPOINT     = "add your endpoint"
 
 # ROOT_CA_PATH = "/app/swinder/utils/root-CA.crt"
 # CERTIFICATE_PATH    = "/app/swinder/utils/swindow.cert.pem"
 # PRIVATE_KEY_PATH    = "/app/swinder/utils/swindow.private.key"
 
-ROOT_CA_PATH = "./swinder/utils/root-CA.crt"
+ROOT_CA_PATH = "./swinder/utils/root-CA.crt" # add respective file
 CERTIFICATE_PATH    = "./swinder/utils/swindow.cert.pem"
 PRIVATE_KEY_PATH    = "./swinder/utils/swindow.private.key"
